@@ -1,14 +1,17 @@
 import React from "react";
 import s from './MyPosts.css'
+import Post from "./Post/Post";
 
 const MyPosts = () => {
-    console.log(s);
     return (
         <div>My posts
-            <div>New Post</div>
+            <div>
+            <textarea></textarea>
+            <button>Add post</button>
+            </div>
             <div className={s.posts}>
-                <div className={s.item}>Post 1</div>
-                <div className={s.item}>Post 2</div>
+                <Post massage='Hi, How are you?' like='30'/>
+                <Post massage='This`is my new post' like='20'/>
             </div>
         </div>
     )
