@@ -10,6 +10,8 @@ import Sett from "./components/Settings/Sett";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
 
 
+
+
 const App = (props) => {
     return (
         <BrowserRouter>
@@ -18,8 +20,8 @@ const App = (props) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path="/profile/*" element={<Profile/>}/>
-                        <Route path="/dialogs/*" element={<Dialogs/>}/>
+                        <Route path="/profile/*" element={<Profile state={props.state.profilePage}/>}/>
+                        <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage} messages={props.state.dialogsPage}/>}/>
                         <Route path="/news/*" element={<News/>}/>
                         <Route path="/music/*" element={<Music/>}/>
                         <Route path="/settings/*" element={<Sett/>}/>
