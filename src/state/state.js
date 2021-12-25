@@ -1,3 +1,8 @@
+import img1 from "./img1.jpg";
+import img2 from "./img2.jpg";
+import img3 from "./img3.jpg";
+import img4 from "./img4.jpg";
+
 let state = {
     profilePage: {
         posts: [
@@ -7,18 +12,17 @@ let state = {
     },
     dialogsPage: {
         messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'Do you spek English?'},
+            {id: 1, message: 'Hi', avatar: img1},
+            {id: 2, message: 'How are you?',avatar: img2},
+            {id: 3, message: 'Do you spek English?', avatar: img1},
         ],
         dialogs: [
-            {id: 1, name: 'Dauren'},
-            {id: 2, name: 'Dima'},
-            {id: 3, name: 'Nurzhan'},
-            {id: 4, name: 'Madara'},
+            {id: 1, name: 'Dauren', avatar: img1},
+            {id: 2, name: 'Dima', avatar: img2},
+            {id: 3, name: 'Nurzhan', avatar: img3},
+            {id: 4, name: 'Madara', avatar: img4},
         ]
     },
-
 }
 
 

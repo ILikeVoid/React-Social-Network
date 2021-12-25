@@ -6,13 +6,18 @@ import Massage from "./Massage/Massage";
 const DialogItem = (props) => {
     let path = "/dialogs/" + props.id
     return (
-        <div className={s.dialog + " " + s.active}><NavLink to={path}>{props.name}</NavLink></div>
+        <div className={s.dialog + " " + s.active}>
+            <NavLink to={path}>
+               <img src={props.avatar}/>
+                {props.name}
+            </NavLink>
+        </div>
     )
 }
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
     let messageElements = props.state.messages.map(m => <Massage massage={m.message}/>)
 
     return (
