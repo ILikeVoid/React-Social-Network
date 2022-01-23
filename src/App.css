@@ -8,10 +8,10 @@
 
   grid-template-rows: 100px 1fr;
   grid-auto-columns: 2fr 10fr;
-  /*grid-gap: 10px;*/
+  grid-gap: 10px;
 }
 
 .app-wrapper-content{
   grid-area: c;
-  background-color: chocolate;
+  background-color: rgba(38,112,192,0.21);
 }

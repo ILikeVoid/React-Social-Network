@@ -1,4 +1,6 @@
-const sidebarPageReducer = (state, action) => {
+let initialState = {
+}
+const sidebarPageReducer = (state = initialState, action) => {
     return state;
 }
 

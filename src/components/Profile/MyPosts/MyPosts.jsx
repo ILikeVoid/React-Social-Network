@@ -1,24 +1,20 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {addPostActionCreator} from "../../../redux/profilePage-reducer";
-import {updateNewPostTextActionCreator} from "../../../redux/profilePage-reducer";
 
 const MyPosts = (props) => {
 
-    let state = props.store.getState().profilePage
+    let state = props.profilePage
     let postsElement = state.posts.map(p => <Post message={p.message} like={p.likesCount}/>)
     let newPostText = state.newPostText
 
-    let newPostElement = React.createRef();
-
     let addPost = () => {
-        props.store.dispatch(addPostActionCreator())
+        props.addPost();
     }
 
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.store.dispatch(updateNewPostTextActionCreator(text))
+    let onPostChange = (e) => {
+        let text = e.target.value;
+        props.updateNewPostText(text);
     }
 
     return (
@@ -29,7 +25,6 @@ const MyPosts = (props) => {
                     <textarea
                         placeholder="What's new?"
                         onChange={onPostChange}
-                        ref={newPostElement}
                         value={newPostText}/>
                 </div>
                 <div>
