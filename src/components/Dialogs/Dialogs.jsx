@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import Message from "./Message/Message";
 
 const DialogItem = (props) => {
@@ -25,32 +25,34 @@ const Dialogs = (props) => {
         props.addMessage()
     }
 
-    let oncNewChangeMessage = (e) =>{
+    let onNewChangeMessage = (e) =>{
         let text = e.target.value;
         props.updateNewMessageText(text);
     }
 
-
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItem}>
-                {dialogsElements}
-            </div>
-            <div className={s.messages}>
-                <div>{messageElements}</div>
-                <div>
+    if (props.isAuth == false){
+        return <Navigate to='/login'/>
+    }
+        return (
+            <div className={s.dialogs}>
+                <div className={s.dialogsItem}>
+                    {dialogsElements}
+                </div>
+                <div className={s.messages}>
+                    <div>{messageElements}</div>
+                    <div>
                     <textarea
                         placeholder="Enter your message"
-                        onChange={oncNewChangeMessage}
+                        onChange={onNewChangeMessage}
                         value={newMessageBody}
                     />
-                </div>
-                <div>
-                    <button onClick={onAddMessage}>Send</button>
+                    </div>
+                    <div>
+                        <button onClick={onAddMessage}>Send</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
 }
 
 export default Dialogs;
