@@ -1,22 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profilePage-reducer";
 import {compose} from "redux";
+import {useParams} from "react-router-dom";
 
-class ProfileContainer extends React.Component {
+const ProfileContainer = (props) => {
 
-    componentDidMount() {
-        this.props.getUserProfile()
-    }
+    let {userId} = useParams()
 
-    render() {
-        return (
-            <Profile {...this.props} profile={this.props.profile}/>
-        )
-    }
+    useEffect(() => {
+        props.getUserProfile(userId)
+    }, [])
+
+    return (
+        <Profile {...props} profile={props.profile}/>
+    )
 }
-
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
