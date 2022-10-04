@@ -32,7 +32,7 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChange, portio
             })}
 
             {portionCount > portionNumber &&
-            <button onClick={() => setPortionNumber(portionNumber + 1)}>СЛЕДУЮЩИЙ</button>}
+            <button onClick={() => setPortionNumber(portionNumber + 1)}>СЛЕД</button>}
         </div>
     )
 }
