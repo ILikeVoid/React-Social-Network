@@ -1,4 +1,4 @@
-import React, {Component, Suspense} from "react";
+import React, {Component, Suspense, useEffect} from "react";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar"
 import News from "./components/News/News";
@@ -12,42 +12,39 @@ import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 
-class App extends Component {
-    componentDidMount() {
-        this.props.initializeApp()
+const App = (props) => {
+    useEffect(() => {
+        props.initializeApp()
+    }, [])
+
+    if (!props.initialized) {
+        return <Preloader/>
     }
-
-    render() {
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-
-        return (
-            <BrowserRouter>
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <Suspense fallback={<div><Preloader/></div>}>
-                            <Routes>
-                                <Route path="/profile/:userId" element={<ProfileContainer/>}/>
-                                <Route path="/dialogs/*" element={<DialogsContainer/>}/>
-                                <Route path="/users/*" element={<UsersContainer/>}/>
-                                <Route path="/news/*" element={<News/>}/>
-                                <Route path="/music/*" element={<Music/>}/>
-                                <Route path="/settings/*" element={<Sett/>}/>
-                                <Route path="/login/" element={<Login/>}/>
-                            </Routes>
-                        </Suspense>
-                    </div>
+    return (
+        <BrowserRouter>
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Suspense fallback={<div><Preloader/></div>}>
+                        <Routes>
+                            <Route path="/profile/:userId" element={<ProfileContainer/>}/>
+                            <Route path="/dialogs/*" element={<DialogsContainer/>}/>
+                            <Route path="/users/*" element={<UsersContainer/>}/>
+                            <Route path="/news/*" element={<News/>}/>
+                            <Route path="/music/*" element={<Music/>}/>
+                            <Route path="/settings/*" element={<Sett/>}/>
+                            <Route path="/login/" element={<Login/>}/>
+                        </Routes>
+                    </Suspense>
                 </div>
-            </BrowserRouter>
-        );
-    }
+            </div>
+        </BrowserRouter>
+    )
 }
 
 const mapStateToProps = (state) => ({
@@ -56,7 +53,7 @@ const mapStateToProps = (state) => ({
 
 const AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
-const MainApp = (props) => {
+const MainApp = () => {
     return (
         <Provider store={store}>
             <AppContainer/>
