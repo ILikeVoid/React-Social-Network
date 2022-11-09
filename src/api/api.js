@@ -4,15 +4,14 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': '99996053-4367-4df1-828c-b7a5a09cfbae'
+        'API-KEY': '119fb6fc-fe4e-4975-be95-8d053b8b4cf8'
     }
 })
 
 export const usersAPI = {
-    getUsers(currentPage, pageSize) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
-        })
-            .then(response => response.data)
+    async getUsers(currentPage, pageSize) {
+        const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`, {});
+        return response.data;
     },
     follow(userId){
         return instance.post(`follow/${userId}`)
@@ -30,7 +29,17 @@ export const profileAPI = {
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status){
-        return instance.put(`profile/status`, {status: status})
+        return instance.put(`profile/status`, {status})
+    },
+    savePhoto(photoFile){
+        const formData = new FormData()
+        formData.append('image', photoFile)
+
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }) 
     }
 }
 

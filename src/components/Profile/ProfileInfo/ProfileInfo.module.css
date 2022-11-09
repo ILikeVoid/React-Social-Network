@@ -1,7 +1,11 @@
-.discriptionBlock {
+.descriptionBlock {
     padding: 10px;
 }
 
 .status {
     padding: 10px;
+}
+
+.mainPhoto {
+    width: 150px;
 }

@@ -2,19 +2,27 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from './ProfileStatus'
+import userPhoto from "../../../assets/images/users.jpg"
 
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
-    if(!profile){
-        return <Preloader/>
+const ProfileInfo = ({isOwner,profile, status, updateStatus, savePhoto}) => {
+    if (!profile) {
+        return <Preloader />
     }
+
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length){
+            savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div>
-            <div><img src='https://img3.akspic.ru/previews/1/0/5/6/6/166501/166501-mikael_gustafsson_malenkaya_pamyat-oblako-rastenie-atmosfera-voda-550x310.jpg'/></div>
-            <div className={s.discriptionBlock}>
-                <img src={profile.photos.large}/>
-                ava+discription</div>
-            <ProfileStatus status={status} updateStatus={updateStatus}/>
+            <div className={s.descriptionBlock}>
+                <div><img src={profile.photos.large || userPhoto} className={s.mainPhoto}/></div>
+                {isOwner && <input type='file' onChange={onMainPhotoSelected}/>}
+            </div>
+            <ProfileStatus status={status} updateStatus={updateStatus} />
         </div>
     )
 }
