@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserStatus, getUserProfile, updateStatus, savePhoto} from "../../redux/profilePage-reducer";
+import {getUserStatus, getUserProfile, updateStatus, savePhoto, saveProfile} from "../../redux/profilePage-reducer";
 import {compose} from "redux";
 import {useParams} from "react-router-dom";
 
-const ProfileContainer = ({profile, status, updateStatus, getUserProfile, getUserStatus, savePhoto}) => {
+const ProfileContainer = ({profile, status, updateStatus, getUserProfile, getUserStatus, savePhoto, saveProfile}) => {
 
     let {userId} = useParams()
 
@@ -21,6 +21,7 @@ const ProfileContainer = ({profile, status, updateStatus, getUserProfile, getUse
         status={status} 
         updateStatus={updateStatus}
         savePhoto={savePhoto}
+        saveProfile={saveProfile}
         />
     )
 }
@@ -33,4 +34,4 @@ let mapStateToProps = (state) => ({
     
 })
 
-export default compose(connect(mapStateToProps, {getUserProfile, getUserStatus, updateStatus, savePhoto}))(ProfileContainer)
+export default compose(connect(mapStateToProps, {getUserProfile, getUserStatus, updateStatus, savePhoto, saveProfile}))(ProfileContainer)

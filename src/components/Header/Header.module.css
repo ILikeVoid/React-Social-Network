@@ -8,5 +8,19 @@
 }
 
 .login_block {
+    font-size: 20px;
+    padding-right: 10px;
     float: right;
+    padding-top: 10px;
+}
+
+.login_block button{
+    height: 20px;
+    width: 80px;
+    cursor: pointer;
+    border: none;
+}
+
+.login_block button:hover{
+    background-color: silver;
 }

@@ -1,11 +1,53 @@
 .descriptionBlock {
     padding: 10px;
-}
-
-.status {
-    padding: 10px;
+    border: solid 1px black;
+    width: 600px;
 }
 
 .mainPhoto {
-    width: 150px;
+    width: 200px;
+}
+
+.button {
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.status {
+    display: flex;
+    padding-top: 10px;
+}
+
+.contacts {
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.looking_job {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.fullname {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.skills {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.about_me{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.contacts_block {
+    border: 1px, solid, black;
+    padding-top: 10px;
 }

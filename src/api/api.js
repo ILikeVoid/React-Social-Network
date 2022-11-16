@@ -13,25 +13,25 @@ export const usersAPI = {
         const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`, {});
         return response.data;
     },
-    follow(userId){
+    follow(userId) {
         return instance.post(`follow/${userId}`)
     },
-    unfollow(userId){
+    unfollow(userId) {
         return instance.delete(`follow/${userId}`)
     },
 }
 
 export const profileAPI = {
-    getProfile(userId){
+    getProfile(userId) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId){
+    getStatus(userId) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status){
-        return instance.put(`profile/status`, {status})
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status })
     },
-    savePhoto(photoFile){
+    savePhoto(photoFile) {
         const formData = new FormData()
         formData.append('image', photoFile)
 
@@ -39,18 +39,21 @@ export const profileAPI = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }) 
+        })
+    },
+    saveProfile(profile) {
+        return instance.put(`profile`, profile)
     }
 }
 
 export const authAPI = {
-    me(){
+    me() {
         return instance.get(`auth/me`)
     },
-    login(email, password, rememberMe = false){
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, { email, password, rememberMe })
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
     }
 }
