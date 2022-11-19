@@ -9,16 +9,19 @@ import style from './../common/FormControl/FormControl.module.css'
 
 const maxLength50 = maxLengthCreator(50)
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, captchaUrl, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
                 {createField('Email', 'email', Input, [required, maxLength50])}
                 {createField('Password', 'password', Input, [required, maxLength50], {type: 'passward'})}
                 {createField(null, 'rememberMe', Input, null, {type: 'checkbox'}, 'remember me')}
+
+                { captchaUrl && <img src={captchaUrl}/> }
+                { captchaUrl && createField('Сиволы из картинки', "", Input, [required], {})}
                 {error && <div className={style.formSummaryError}>
                     {error}
-                </div>}
+                </div>} 
                 <div>
                     <button>Login</button>
                 </div>
@@ -29,27 +32,28 @@ const LoginForm = ({handleSubmit, error}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-const Login = ({login, isAuth}) => {
+const Login = ({login, isAuth, captchaUrl}) => {
 
     const onSubmit = (formData) => {
-        login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if(isAuth) {
-        return <Navigate to={'/profile/25637'}/>
+        return <Navigate to={'/profile/25123'}/>
     }
 
     return (
         <div>
           <h1>Login</h1>
-          <LoginReduxForm onSubmit={onSubmit}/>
+          <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 export default connect(mapStateToProps, {login})(Login)
